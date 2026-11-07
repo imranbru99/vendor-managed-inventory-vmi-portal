@@ -1,0 +1,185 @@
+:root {
+    --vmi-teal: #0f766e;
+    --vmi-teal-dark: #0d5c56;
+    --vmi-cyan: #22d3ee;
+    --vmi-slate-950: #0f172a;
+    --vmi-slate-900: #1e293b;
+    --vmi-slate-100: #f1f5f9;
+    --vmi-surface: #ffffff;
+    --vmi-muted: #64748b;
+    --vmi-border: rgba(15, 118, 110, 0.15);
+}
+
+[data-theme="dark"],
+:root:has(.theme-dark) {
+    --vmi-surface: #0f172a;
+    --vmi-slate-100: #1e293b;
+    --vmi-muted: #94a3b8;
+    --vmi-border: rgba(34, 211, 238, 0.12);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body.public-site {
+    font-family: "Source Sans 3", system-ui, sans-serif;
+    color: var(--vmi-slate-900);
+    background: var(--vmi-slate-100);
+}
+
+[data-theme="dark"] body.public-site,
+body.public-site.theme-dark {
+    color: #e2e8f0;
+    background: var(--vmi-slate-950);
+}
+
+.font-display {
+    font-family: "Sora", system-ui, sans-serif;
+}
+
+/* Full-bleed hero */
+.hero-bleed {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    overflow: hidden;
+}
+
+.hero-gradient {
+    background:
+        radial-gradient(ellipse 80% 60% at 70% 20%, rgba(34, 211, 238, 0.18), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 10% 80%, rgba(15, 118, 110, 0.35), transparent 50%),
+        linear-gradient(165deg, #0f172a 0%, #134e4a 45%, #0f766e 100%);
+}
+
+[data-theme="dark"] .hero-gradient,
+.theme-dark .hero-gradient {
+    background:
+        radial-gradient(ellipse 80% 60% at 70% 20%, rgba(34, 211, 238, 0.12), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 10% 80%, rgba(15, 118, 110, 0.25), transparent 50%),
+        linear-gradient(165deg, #020617 0%, #0f172a 50%, #134e4a 100%);
+}
+
+@keyframes hero-drift {
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(-12px, 8px) scale(1.02);
+    }
+}
+
+.hero-orb {
+    animation: hero-drift 14s ease-in-out infinite;
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: scale(0.95);
+        opacity: 0.6;
+    }
+    70% {
+        transform: scale(1.08);
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.cta-pulse::before {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 9999px;
+    border: 2px solid rgba(34, 211, 238, 0.5);
+    animation: pulse-ring 2.4s ease-out infinite;
+}
+
+@keyframes workflow-dash {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.workflow-line {
+    stroke-dasharray: 8 6;
+    stroke-dashoffset: 120;
+    animation: workflow-dash 3s ease-in-out infinite alternate;
+}
+
+@keyframes fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.nav-glass {
+    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.82);
+    border-bottom: 1px solid var(--vmi-border);
+}
+
+[data-theme="dark"] .nav-glass,
+.theme-dark .nav-glass {
+    background: rgba(15, 23, 42, 0.85);
+}
+
+.prose-public h2 {
+    font-family: "Sora", system-ui, sans-serif;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+.module-card {
+    border: 1px solid var(--vmi-border);
+    background: var(--vmi-surface);
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.module-card:hover {
+    border-color: rgba(15, 118, 110, 0.45);
+    box-shadow: 0 12px 40px -12px rgba(15, 118, 110, 0.25);
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--vmi-teal) 0%, #14b8a6 100%);
+}
+
+.workflow-node {
+    fill: var(--vmi-teal);
+    filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.4));
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) body.public-site {
+        color: #e2e8f0;
+        background: var(--vmi-slate-950);
+    }
+
+    :root:not([data-theme="light"]) .nav-glass {
+        background: rgba(15, 23, 42, 0.85);
+    }
+}
